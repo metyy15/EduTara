@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EduTara — Teacher Naruto</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- LOGIN SCREEN -->
+  <section id="loginScreen" class="screen active">
+    <div class="card login-card">
+      <h1>🎓 EduTara</h1>
+      <p class="tagline">Your friendly AI teacher Elara is waiting!</p>
+      <label>Your Name
+        <input id="inpName" type="text" placeholder="e.g. Riya" />
+      </label>
+      <label>Class / Grade
+        <select id="inpClass">
+          <option value="1">Class 1</option>
+          <option value="2">Class 2</option>
+          <option value="3">Class 3</option>
+          <option value="4">Class 4</option>
+          <option value="5">Class 5</option>
+          <option value="6">Class 6</option>
+          <option value="7">Class 7</option>
+          <option value="8">Class 8</option>
+          <option value="9">Class 9</option>
+          <option value="10">Class 10</option>
+          <option value="11">Class 11</option>
+          <option value="12">Class 12</option>
+        </select>
+      </label>
+      <label>Age
+        <input id="inpAge" type="number" min="4" max="19" placeholder="e.g. 10" />
+      </label>
+      <button id="btnLogin" class="btn big">Start Learning 🚀</button>
+    </div>
+
+  </section>
+
+  <!-- DASHBOARD -->
+  <section id="dashScreen" class="screen">
+    <header id="topBar" style="display:flex;align-items:center;gap:12px;background:#fff;padding:10px 16px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,.1);margin-bottom:14px;">
+      <img src="images/logo.png" alt="logo" style="height:42px;border-radius:10px;" />
+      <h2 style="margin:0;color:#7c5cff;font-weight:800;">EduTara</h2>
+      <div style="flex:1"></div>
+      <button id="btnHome" class="btn small" style="background:#fff;border:2px solid #eee;"><img src="images/home.png" alt="home" style="height:22px;vertical-align:middle;" /></button>
+      <button id="btnLang" class="btn small" style="background:#fff;border:2px solid #eee;">🇮🇳 हिंदी</button>
+      <button id="btnLogout" class="btn small" style="background:#e8e8e8;color:#111;border:none;">Logout</button>
+    </header>
+    <header>
+      <h2 id="greet" style="display:none">Hello!</h2>
+    </header>
+    <div style="position:relative;width:100%;aspect-ratio:3/1;margin-bottom:12px;border-radius:14px;overflow:hidden;">
+      <img id="bannerImg" src="images/banner_1.jpeg" alt="banner" style="width:100%;height:100%;object-fit:cover;" />
+    </div>
+    <script>
+      (function(){
+        const imgs = ['images/banner_1.jpeg','images/banner_2.jpeg','images/banner_3.jpeg'];
+        let i = 0;
+        const el = document.getElementById('bannerImg');
+        setInterval(() => { i = (i + 1) % imgs.length; el.src = imgs[i]; }, 3000);
+      })();
+    </script>
+    <div class="dash-grid">
+      <div class="card">
+        <h3>📓 NCERT Lessons</h3>
+        <ul id="lessonList" style="list-style:none;padding:0;"></ul>
+      </div>
+      <div class="card">
+        <h3><img src="images/notes.jpeg" style="height:36px;vertical-align:middle;border-radius:8px;margin-right:10px;margin-left:6px;" /> Revision Room</h3>
+        <p id="revEmpty" class="muted">No weak topics yet. Great job!</p>
+        <ul id="revList"></ul>
+        <button id="btnRevision" class="btn" disabled>Enter Revision</button>
+      </div>
+      <div class="card">
+        <h3><img src="images/downloaded.png" style="height:36px;vertical-align:middle;border-radius:8px;margin-right:10px;margin-left:6px;" /> Saved Illustrations</h3>
+        <p id="savedEmpty" class="muted">No illustrations saved yet. They will appear here as Naruto draws them!</p>
+        <ul id="savedList" style="list-style:none;padding:0;"></ul>
+      </div>
+    </div>
+    <div id="stage">
+      <div id="board">
+        <div id="avatarWrap">
+          <img id="avatar" src="images/motu_avatar.svg" style="width:100%;animation:bob 2s ease-in-out infinite;filter:drop-shadow(0 6px 8px rgba(0,0,0,.4));border-radius:50%;" />
+          <div id="avatarName">Naruto 🎓</div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;">
+          <div id="boardTitle">Whiteboard</div>
+          <div id="boardBody"></div>
+        </div>
+      </div>
+    </div>
+    <div id="controls" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+      <input id="fileInput" type="file" accept="image/*" hidden />
+      <button id="btnEnd" class="btn small ghost" style="padding:12px 40px;font-size:15px;">End</button>
+      <button id="btnMic" style="border:none;background:#7c5cff;color:#fff;border-radius:999px;padding:12px 40px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.3);font-size:15px;">Start</button>
+      <span id="sigIcon" style="display:flex;align-items:center;gap:6px;"><img src="images/signal.jpeg" style="height:30px;border-radius:6px;" /><span id="sigText" style="color:#111;font-weight:700;">Internet Strength: Good</span></span>
+      <span id="audioIcon" style="display:flex;align-items:center;gap:6px;"><img src="images/sound.jpeg" style="height:30px;border-radius:6px;" /><span id="audioText" style="color:#111;font-weight:700;">Audio Quality: Good</span></span>
+    </div>
+    <div id="textRow" style="display:flex;gap:8px;margin-top:8px;">
+      <input id="textInput" type="text" placeholder="Type a message..." style="flex:1;border-radius:12px;border:2px solid #eee;padding:10px;" />
+      <button id="btnSend" class="btn round">➤</button>
+    </div>
+    <div id="transcript" style="background:#fff;border-radius:14px;padding:10px;max-height:180px;overflow-y:auto;box-shadow:inset 0 0 0 2px #eee;margin-top:8px;">
+        <b style="color:#555;">Live Transcript</b>
+        <div class="muted" style="color:#aaa;">Live transcript will appear here…</div>
+      </div>
+    <button id="btnUpload" class="btn round" style="position:fixed;right:16px;bottom:16px;z-index:20;"><img src="images/camera.jpeg" style="width:34px;height:34px;border-radius:50%;object-fit:cover;" /></button>
+    <div id="modeBadge"></div>
+  
+    <div style="display:flex;justify-content:flex-end;margin-top:12px;">
+      <button id="btnLive" class="btn live">🔴 GO LIVE<br><small>Talk to Naruto now</small></button>
+    </div>
+  </section>
+
+  <script>window.onerror=function(m,s,l,c){var d=document.createElement('pre');d.style.cssText='background:red;color:#fff;padding:8px;position:fixed;top:0;left:0;right:0;z-index:99999;font-size:12px;white-space:pre-wrap;';d.textContent='JS ERROR: '+m+' @ index '+l+':'+c;document.body.prepend(d);};</script>
+  <script src="js/config.js?v=12"></script>
+  <script src="js/data.js?v=12"></script>
+  <script src="js/app.js?v=12"></script>
+</body>
+</html>

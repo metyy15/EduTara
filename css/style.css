@@ -1,0 +1,60 @@
+* { box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+body { margin: 0; background: linear-gradient(135deg,#ffecd2,#fcb69f); min-height: 100vh; }
+.screen { display: none; padding: 16px; max-width: 1100px; margin: 0 auto; }
+.screen.active { display: block; }
+.card { background: #fff; border-radius: 18px; padding: 20px; box-shadow: 0 6px 18px rgba(0,0,0,.12); margin-bottom: 16px; }
+.login-card { max-width: 420px; margin: 40px auto; text-align: center; }
+label { display: block; text-align: left; margin: 12px 0; font-weight: 600; }
+input, select { width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #eee; margin-top: 4px; font-size: 16px; }
+.btn { background: #7c5cff; color: #fff; border: none; border-radius: 14px; padding: 12px 20px; font-size: 16px; cursor: pointer; margin-top: 10px; transition: transform .15s; }
+.btn:hover { transform: scale(1.04); }
+.btn:disabled { background: #bbb; cursor: not-allowed; }
+.btn.big { width: 100%; font-size: 20px; padding: 16px; }
+.btn.small { padding: 8px 14px; font-size: 14px; }
+.btn.ghost { background: #eee; color: #333; }
+.tagline { color: #777; }
+header { display: flex; justify-content: space-between; align-items: center; }
+.dash-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+@media (max-width: 800px){ .dash-grid { grid-template-columns: 1fr; } }
+ul { padding-left: 18px; }
+.muted { color: #999; }
+.center { display: flex; align-items: center; justify-content: center; }
+.btn.live { background: #ff4d6d; font-size: 26px; padding: 26px 34px; border-radius: 24px; }
+.btn.live small { font-size: 13px; }
+
+/* LIVE SCREEN */
+#liveScreen { max-width: 100%; padding: 8px; height: 100vh; overflow: hidden; display: none; flex-direction: column; }
+#liveScreen.active { display: flex; }
+#stage { height: 46vh; display: flex; background: #1e1e2e; border-radius: 20px; padding: 12px; align-items: stretch; position: relative; margin-bottom: 8px; }
+#board { position: absolute; inset: 0; background: #fffef5; border-radius: 14px; padding: 12px; overflow: hidden; display: flex; gap: 10px; }
+#boardBody { width: 100%; height: 100%; box-sizing: border-box; flex:1; }
+
+#boardBody svg { width: 100%; height: 100%; background: #fff; border: 2px dashed #ddd; border-radius: 10px; }
+#boardBody img { width: 100%; height: 100%; object-fit: contain; background: #fff; border: 2px dashed #ddd; border-radius: 10px; }
+#boardTitle { display: none; }
+#avatarWrap { position: static; width: 110px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(124,92,255,.08); border-radius: 12px; padding: 8px; }
+#avatarWrap.left { left: 2%; }
+#avatarWrap.right { left: 2%; }
+#avatarWrap.center { left: 2%; }
+#avatar { width: 100%; animation: bob 2s ease-in-out infinite; filter: drop-shadow(0 6px 8px rgba(0,0,0,.4)); }
+#avatarName { display: block; }
+#caption { background: rgba(0,0,0,.75); color: #fff; font-size: 18px; padding: 14px 18px; border-radius: 14px; margin: 10px 0; min-height: 58px; text-align: center; }
+.hero-card { text-align: center; }
+.big-emoji { font-size: 48px; }
+.live-card { background: linear-gradient(135deg,#ff9a9e,#fad0c4); }
+
+@keyframes bob { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-8px);} }
+#avatarWrap.talking #mouth { d: path("M88 122 Q100 136 112 122"); animation: talk .3s infinite alternate; }
+@keyframes talk { from{ transform: scaleY(1);} to{ transform: scaleY(1.8);} }
+#avatarName { color: #333; text-align:center; margin-top: 6px; font-weight: 700; }
+#chatLog { background: #fff; border-radius: 14px; padding: 12px; margin: 10px 0; max-height: 24vh; overflow-y: auto; }
+.msg { margin: 6px 0; padding: 8px 12px; border-radius: 12px; max-width: 80%; }
+.msg.ai { background: #ede9ff; }
+.msg.me { background: #d9f6e8; margin-left: auto; }
+#controls { display: flex; gap: 8px; align-items: center; }
+.btn.round { border-radius: 50%; width: 54px; height: 54px; font-size: 22px; padding: 0; margin: 0; }
+#btnMic.rec { background: #ff4d6d; animation: pulse 1s infinite; }
+@keyframes pulse { 50% { transform: scale(1.12);} }
+#textInput { flex: 1; margin: 0; }
+#modeBadge { position: fixed; top: 10px; right: 12px; background: #ff4d6d; color: #fff; padding: 6px 12px; border-radius: 20px; font-weight: 700; display: none; }
+#btnMic.rec { background: #ff4d6d !important; }
